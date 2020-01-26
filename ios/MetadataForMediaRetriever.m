@@ -1,8 +1,22 @@
 #import "MetadataForMediaRetriever.h"
 
-
+static NSArray *metadatas;
 
 @implementation MetadataForMediaRetriever
+
+- (NSArray *)metadatas
+{
+  if (!metadatas) {
+    metadatas = @[
+      @"albumName",
+      @"artist",
+      @"genre",
+      @"duration",
+      @"title"
+    ];
+  }
+  return metadatas;
+}
 
 RCT_EXPORT_MODULE()
 
@@ -11,7 +25,7 @@ resolver:(RCTPromiseResolveBlock)resolve
 rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSFileManager *fileManager = [NSFileManager defaultManager];
-
+  NSLog(@"My file: %@", path);
   BOOL isDir;
   if (![fileManager fileExistsAtPath:path isDirectory:&isDir] || isDir){
     NSError *err = [NSError errorWithDomain:@"file not found" code:-15 userInfo:nil];
@@ -26,15 +40,21 @@ rejecter:(RCTPromiseRejectBlock)reject)
   NSArray *keys = [NSArray arrayWithObjects:@"commonMetadata", nil];
   [asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
     // string keys
-    NSArray *items = [AVMetadataItem metadataItemsFromArray:asset.commonMetadata
-    withKey:key
-    keySpace:AVMetadataKeySpaceCommon];
-    for (AVMetadataItem *item in items) {
-      [result setObject:item.value forKey:key];
+    for (NSString *key in [self metadatas]) {
+      NSArray *items = [AVMetadataItem metadataItemsFromArray:asset.commonMetadata
+                                                     withKey:key
+                                                    keySpace:AVMetadataKeySpaceCommon];
+      for (AVMetadataItem *item in items) {
+        [result setObject:item.value forKey:key];
+      }
     }
-
-    resolve(result);
   }];
+
+    CMTime assetTime = [asset duration];
+    Float64 duration = CMTimeGetSeconds(assetTime)*1000;
+    [result setValue:[NSNumber numberWithFloat:duration] forKey:@"duration"];
+
+  resolve(result);
 }
 
 @end
