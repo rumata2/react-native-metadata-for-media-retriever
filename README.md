@@ -1,2 +1,17 @@
 # react-native-metadata-for-media-retriever
-React Native module to retrieve media file metadata
+
+## Getting started
+
+`$ npm install react-native-metadata-for-media-retriever --save`
+
+### Mostly automatic installation
+
+`$ react-native link react-native-metadata-for-media-retriever`
+
+## Usage
+```javascript
+import MetadataForMediaRetriever from 'react-native-metadata-for-media-retriever';
+
+// TODO: What to do with the module?
+MetadataForMediaRetriever;
+```

@@ -1,0 +1,33 @@
+{
+  "name": "react-native-metadata-for-media-retriever",
+  "title": "React Native Metadata For Media Retriever",
+  "version": "1.0.0",
+  "description": "Retrieve metadata of a media file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github_account/react-native-metadata-for-media-retriever.git",
+    "baseUrl": "https://github.com/github_account/react-native-metadata-for-media-retriever"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Vova Soroka",
+    "email": "vova@sandbx.co"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.59.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.8.3",
+    "react-native": "^0.59.10"
+  }
+}
